@@ -23,4 +23,24 @@ public class Lox {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
         run(new String(bytes, Charset.defaultCharset()));
     }
+    private static void runPrompt() throws IOException{
+        InputStreamReader intput=new InputStreamReader(System.in);
+        BufferedReader reader=new BufferedReader(intput);
+
+        for(;;){
+            System.out.println(">");
+            String line=reader.readLine();
+            if(line==null)break;
+            run(line);
+        }
+    }
+    private static void run(String source){
+        Scanner scanner =new Scanner(source);
+        List<Token> token = scanner.scanToken();
+
+        //Change after words
+        for(Token token:tokens){
+            System.out.println(token);
+        }
+    }
 }
